@@ -21,7 +21,7 @@ class UserController extends BaseController {
 	 */
 	public function create()
 	{
-		//
+		$this->layout->content = View::make('users.create')->nest('form', 'users.form');
 	}
 
 	/**
