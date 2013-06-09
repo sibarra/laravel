@@ -1,6 +1,6 @@
-{{ Form::open() }}
+{{ Form::open(array('action' => 'UserController@store')) }}
     <p>
-        Name: {{ Form::text('name') }}
+        Name: {{ Form::text('name', Input::old('name')) }}
     </p>
 
     <p>
@@ -9,4 +9,7 @@
 
     <p>
         Password: {{ Form::password('password') }}
+    </p>
+    <p>
+        {{ Form::submit('Submit') }}
     </p>

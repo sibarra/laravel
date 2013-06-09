@@ -3,7 +3,6 @@
 class UserController extends BaseController {
 
     protected $layout = "layouts.default";
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -31,7 +30,19 @@ class UserController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+        $input = Input::all();
+        $user = new User($input);
+        $valid = $user->isValid($input);
+        if($valid->fails())
+        {
+            $messages = $valid->messages();
+            #$this->layout->content = View::make('users.create')->nest('form', 'users.form')->with(array('messages' => $messages, 'input' => $input));
+            return Redirect::to('users/create')->withErrors($valid)->withInput();
+        }
+        else
+        {
+            $user->save();
+        }
 	}
 
 	/**
